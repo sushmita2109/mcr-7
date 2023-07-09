@@ -1,35 +1,60 @@
-import { Box, Card, CardMedia, Link } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Link,
+  Typography,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useCountry } from "../Context/CountryContext";
+import { useEffect } from "react";
 
 export const Country = () => {
   const { continentId } = useParams();
-  const { countryStates } = useCountry();
-  const filteredData = countryStates?.continents?.filter(
-    (continent) => continent.id === continentId
+  console.log("🚀 ~ file: Country.jsx:8 ~ Country ~ continentId:", continentId);
+  const { countryStates, countryDispatch } = useCountry();
+  console.log(
+    "🚀 ~ file: Country.jsx:10 ~ Country ~ countryStates:",
+    countryStates
   );
+  const getCountryData = () => {
+    const filteredData = countryStates?.continents?.filter(
+      (continent) => continent.id == continentId
+    );
+    console.log(
+      "🚀 ~ file: Country.jsx:13 ~ getCountryData ~ filteredData:",
+      filteredData
+    );
+    countryDispatch({ type: "GET_COUNTRY", payload: filteredData });
+  };
+
+  useEffect(() => {
+    getCountryData();
+  }, []);
   return (
-    <Box>
-      {filteredData?.countries?.map((country) => (
-        <Card key={country.id} sx={{ maxWidth: "500px" }}>
-          <Link to={`/${continentId}/${country.id}`}>
-            <CardMedia
-              image={country.image}
-              sx={{ width: "200px", height: "250px" }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                color: "white",
-                top: 10,
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              {country.name}
-            </div>
-          </Link>
-        </Card>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+      <Typography variant="h1">Countries</Typography>
+      {countryStates?.allcountries?.map((contient) => (
+        <div
+          key={contient.id}
+          style={{ display: "flex", flexDirection: "row", gap: "5px" }}
+        >
+          {contient?.countries?.map((country) => (
+            <Card key={country.id} sx={{ maxWidth: "500px", display: "flex" }}>
+              <Link
+                to={`/${country.id}`}
+                sx={{ textDecoration: "none", color: "black" }}
+              >
+                <CardMedia
+                  image={country.image}
+                  sx={{ width: "200px", height: "250px" }}
+                />
+                <CardContent>{country.name}</CardContent>
+              </Link>
+            </Card>
+          ))}
+        </div>
       ))}
     </Box>
   );

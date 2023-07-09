@@ -17,7 +17,7 @@ export const CountryProvider = ({ children }) => {
     getData();
   }, []);
   return (
-    <CountryContext.Provider value={{ countryStates }}>
+    <CountryContext.Provider value={{ countryStates, countryDispatch }}>
       {children}
     </CountryContext.Provider>
   );
