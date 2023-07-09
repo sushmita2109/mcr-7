@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:continentId" element={<Country />} />
-        <Route path="/:countryId" element={<Destination />} />
+        <Route path="/country/:continentId" element={<Country />} />
+        <Route path="/destination/:countryId" element={<Destination />} />
       </Routes>
     </div>
   );

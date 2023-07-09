@@ -9,10 +9,19 @@ export const Destination = () => {
     countryId
   );
   const { countryStates, countryDispatch } = useCountry();
-  const getCountryData = () => {};
+  const getDestinationData = () => {
+    const filteredData = countryStates?.allcountries;
+    const filteredData1 = filteredData?.map((item) => {
+      item.countries.filter((country) => country.id == countryId);
+    });
+    console.log(
+      "🚀 ~ file: Destination.jsx:17 ~ filteredData1 ~ filteredData1:",
+      filteredData1
+    );
+  };
 
   useEffect(() => {
-    getCountryData();
+    getDestinationData();
   }, []);
 
   return <div></div>;

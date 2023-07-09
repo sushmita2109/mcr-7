@@ -30,7 +30,7 @@ export const Home = () => {
             }}
           >
             <Link
-              to={`/${continent.id}`}
+              to={`/country/${continent.id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <CardMedia

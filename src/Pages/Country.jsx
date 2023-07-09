@@ -1,12 +1,5 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Link,
-  Typography,
-} from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useParams, Link } from "react-router-dom";
 import { useCountry } from "../Context/CountryContext";
 import { useEffect } from "react";
 
@@ -43,7 +36,7 @@ export const Country = () => {
           {contient?.countries?.map((country) => (
             <Card key={country.id} sx={{ maxWidth: "500px", display: "flex" }}>
               <Link
-                to={`/${country.id}`}
+                to={`/destination/${country.id}`}
                 sx={{ textDecoration: "none", color: "black" }}
               >
                 <CardMedia
